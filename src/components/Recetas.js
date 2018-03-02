@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class Recetas extends Component {
     componentWillMount() {
-        //this.props.dispatch(getFood());
         this.props.getFood();
     }
 
