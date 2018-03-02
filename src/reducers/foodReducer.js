@@ -1,7 +1,5 @@
 export default function reducer(
-    state = {
-        todo: []
-    },
+    state = {},
     action
 ) {
     switch (action.type) {
@@ -16,6 +14,12 @@ export default function reducer(
                 ...state,
                 created: true,
                 categories: action.payload
+            };
+        case 'REMOVE_CATEGORY':
+            return {
+                ...state,
+                created: true,
+                categories: state.categories.filter(category => category === action.payload)
             };
     }
 

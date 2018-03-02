@@ -13,3 +13,12 @@ export function getFood() {
         });
     }
 }
+
+export function removeCategory(category) {
+    return function(dispatch) {
+        dispatch({
+            type: 'REMOVE_CATEGORY',
+            category
+        })
+    }
+}
