@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
-import { getFood } from '../actions/foodAction';
+import { getFood, removeCategory } from '../actions/foodAction';
 import { connect } from 'react-redux';
+
+class Recetas extends Component {
+    componentWillMount() {
+        //this.props.dispatch(getFood());
+        this.props.getFood();
+    }
+
+    render() {
+        const categoriesListComponent = this.props.categories.map((category, index) => {
+            return <li key={index}>
+                {category.name}
+                <button onClick={()=> this.props.removeCategory(category)}>Eliminar</button>
+            </li>
+        });
+
+        return <ul>{categoriesListComponent}</ul>
+    }
+}
 
 const mapStateToProps = state => {
     return {
@@ -8,16 +26,15 @@ const mapStateToProps = state => {
     }
 };
 
-class Recetas extends Component {
-    componentWillMount() {
-        this.props.dispatch(getFood());
+const mapDispatchToProps = dispatch => {
+    return {
+        getFood() {
+            dispatch(getFood())
+        },
+        removeCategory(category) {
+            dispatch(removeCategory(category))
+        }
     }
+};
 
-    render() {
-        const categoriesListComponent = this.props.categories.map((category, index) => <li key={index}>{category.name}</li>);
-
-        return <ul>{categoriesListComponent}</ul>
-    }
-}
-
-export default connect(mapStateToProps)(Recetas)
+export default connect(mapStateToProps, mapDispatchToProps)(Recetas)

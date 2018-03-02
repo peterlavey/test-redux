@@ -19,7 +19,7 @@ export default function reducer(
             return {
                 ...state,
                 created: true,
-                categories: state.categories.filter(category => category === action.payload)
+                categories: state.categories.filter(category => category.name !== action.category.name)
             };
     }
 
