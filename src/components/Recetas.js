@@ -9,13 +9,29 @@ class Recetas extends Component {
 
     render() {
         const categoriesListComponent = this.props.categories.map((category, index) => {
-            return <li key={index}>
-                {category.name}
-                <button onClick={()=> this.props.removeCategory(category)}>Eliminar</button>
-            </li>
+            return (
+                <tr key={index}>
+                    <td>{category.name}</td>
+                    <td>
+                        <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" onClick={()=> this.props.removeCategory(category)}>Eliminar</button>
+                    </td>
+                </tr>
+            )
         });
 
-        return <ul>{categoriesListComponent}</ul>
+        return (
+            <div className="mdl-grid">
+                <div className="mdl-layout-spacer"></div>
+                <div className="mdl-cell mdl-cell--4-col">
+                    <table className="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                        <tbody>
+                        {categoriesListComponent}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="mdl-layout-spacer"></div>
+            </div>
+        )
     }
 }
 
